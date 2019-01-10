@@ -1,7 +1,7 @@
 [docker-ce]
 name=Docker-CE Repository
 baseurl={{ docker_rh_repo_base_url }}
-enabled=0
+enabled=1
 gpgcheck=1
 keepcache={{ docker_rpm_keepcache | default('1') }}
 gpgkey={{ docker_rh_repo_gpgkey }}
@@ -10,7 +10,7 @@ gpgkey={{ docker_rh_repo_gpgkey }}
 [docker-engine]
 name=Docker-Engine Repository
 baseurl={{ dockerproject_rh_repo_base_url }}
-enabled=1
+enabled=0
 gpgcheck=1
 keepcache={{ docker_rpm_keepcache | default('1') }}
 gpgkey={{ dockerproject_rh_repo_gpgkey }}
