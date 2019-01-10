@@ -13,7 +13,7 @@ function usage {
 
 [ "$envname" == "" ] && usage
 
-env_dir="`pwd`/../inventory/td-test"
+env_dir="`pwd`/../inventory/$envname"
 if [ ! -d $env_dir ] ; then
   echo "no env dir $env_dir"
   exit 1
