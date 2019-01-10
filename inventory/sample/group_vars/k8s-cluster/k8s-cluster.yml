@@ -20,9 +20,11 @@ kube_api_anonymous_auth: true
 
 ## Change this to use another Kubernetes version, e.g. a current beta release
 kube_version: v1.12.3
+kube_version_repo: 1-12-3
+repo_prefix: "registry1:8000/kubespray-{{ kube_version_repo }}/"
 
 # kubernetes image repo define
-kube_image_repo: "gcr.io/google-containers"
+kube_image_repo: "{{ repo_prefix }}gcr.io/google-containers"
 
 # Where the binaries will be downloaded.
 # Note: ensure that you've enough disk space (about 1G)
@@ -71,7 +73,7 @@ kube_users:
 
 # Choose network plugin (cilium, calico, contiv, weave or flannel)
 # Can also be set to 'cloud', which lets the cloud provider setup appropriate routing
-kube_network_plugin: calico
+kube_network_plugin: flannel
 
 # Kubernetes internal network for services, unused block of space.
 kube_service_addresses: 10.233.0.0/18

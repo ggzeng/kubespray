@@ -37,7 +37,7 @@ image_arch: "{{host_architecture | default('amd64')}}"
 # Versions
 kube_version: v1.12.4
 kubeadm_version: "{{ kube_version }}"
-etcd_version: v3.2.24
+etcd_version: v3.2.25
 
 # kubernetes image repo define
 kube_image_repo: "gcr.io/google-containers"
@@ -63,10 +63,10 @@ kube_router_version: "v0.2.1"
 multus_version: "v3.1.autoconf"
 
 # Download URLs
-kubeadm_download_url: "https://storage.googleapis.com/kubernetes-release/release/{{ kubeadm_version }}/bin/linux/{{ image_arch }}/kubeadm"
-hyperkube_download_url: "https://storage.googleapis.com/kubernetes-release/release/{{ kube_version }}/bin/linux/amd64/hyperkube"
-etcd_download_url: "https://github.com/coreos/etcd/releases/download/{{ etcd_version }}/etcd-{{ etcd_version }}-linux-amd64.tar.gz"
-cni_download_url: "https://github.com/containernetworking/plugins/releases/download/{{ cni_version }}/cni-plugins-{{ image_arch }}-{{ cni_version }}.tgz"
+kubeadm_download_url: "http://reposite1:8080/yumrepo/kubernetes/release/{{ kubeadm_version }}/kubeadm.x86_64.rpm"
+hyperkube_download_url: "http://reposite1:8080/yumrepo/kubernetes/release/{{ kubeadm_version }}/hyperkube-{{ image_arch }}"
+etcd_download_url: "http://reposite1:8080/yumrepo/kubernetes/etcd-{{ etcd_version }}-linux-amd64.tar.gz"
+cni_download_url: "http://reposite1:8080/yumrepo/kubernetes/cni-plugins-{{ image_arch }}-{{ cni_version }}.tgz"
 
 # Checksums
 hyperkube_checksums:
@@ -122,11 +122,11 @@ kubeadm_binary_checksum: "{{ kubeadm_checksums[kubeadm_version] }}"
 # You need to deploy kubernetes cluster on local private development.
 # Also provide the address of your own private registry.
 # And use --insecure-registry options for docker
-etcd_image_repo: "quay.io/coreos/etcd"
+etcd_image_repo: "{{ repo_prefix }}quay.io/coreos/etcd"
 etcd_image_tag: "{{ etcd_version }}{%- if image_arch != 'amd64' -%}-{{ image_arch }}{%- endif -%}"
-flannel_image_repo: "quay.io/coreos/flannel"
+flannel_image_repo: "{{ repo_prefix }}quay.io/coreos/flannel"
 flannel_image_tag: "{{ flannel_version }}"
-flannel_cni_image_repo: "quay.io/coreos/flannel-cni"
+flannel_cni_image_repo: "{{ repo_prefix }}quay.io/coreos/flannel-cni"
 flannel_cni_image_tag: "{{ flannel_cni_version }}"
 calicoctl_image_repo: "quay.io/calico/ctl"
 calicoctl_image_tag: "{{ calico_ctl_version }}"
@@ -140,7 +140,7 @@ calico_rr_image_repo: "quay.io/calico/routereflector"
 calico_rr_image_tag: "{{ calico_rr_version }}"
 hyperkube_image_repo: "{{ kube_image_repo }}/hyperkube-{{ image_arch }}"
 hyperkube_image_tag: "{{ kube_version }}"
-pod_infra_image_repo: "gcr.io/google_containers/pause-{{ image_arch }}"
+pod_infra_image_repo: "{{ repo_prefix }}gcr.io/google_containers/pause-{{ image_arch }}"
 pod_infra_image_tag: "{{ pod_infra_version }}"
 install_socat_image_repo: "xueshanf/install-socat"
 install_socat_image_tag: "latest"
@@ -169,7 +169,7 @@ kube_router_image_repo: "cloudnativelabs/kube-router"
 kube_router_image_tag: "{{ kube_router_version }}"
 multus_image_repo: "docker.io/nfvpe/multus"
 multus_image_tag: "{{ multus_version }}"
-nginx_image_repo: nginx
+nginx_image_repo: "{{ repo_prefix }}nginx"
 nginx_image_tag: 1.13
 dnsmasq_version: 2.78
 dnsmasq_image_repo: "andyshinn/dnsmasq"
@@ -179,7 +179,7 @@ kubedns_image_repo: "gcr.io/google_containers/k8s-dns-kube-dns-{{ image_arch }}"
 kubedns_image_tag: "{{ kubedns_version }}"
 
 coredns_version: "1.2.6"
-coredns_image_repo: "coredns/coredns"
+coredns_image_repo: "{{ repo_prefix }}coredns/coredns"
 coredns_image_tag: "{{ coredns_version }}"
 
 dnsmasq_nanny_image_repo: "gcr.io/google_containers/k8s-dns-dnsmasq-nanny-{{ image_arch }}"
@@ -190,11 +190,11 @@ dnsmasqautoscaler_version: 1.1.2
 dnsmasqautoscaler_image_repo: "gcr.io/google_containers/cluster-proportional-autoscaler-{{ image_arch }}"
 dnsmasqautoscaler_image_tag: "{{ dnsmasqautoscaler_version }}"
 dnsautoscaler_version: 1.3.0
-dnsautoscaler_image_repo: "gcr.io/google_containers/cluster-proportional-autoscaler-{{ image_arch }}"
+dnsautoscaler_image_repo: "{{ repo_prefix }}gcr.io/google_containers/cluster-proportional-autoscaler-{{ image_arch }}"
 dnsautoscaler_image_tag: "{{ dnsautoscaler_version }}"
 test_image_repo: busybox
 test_image_tag: latest
-busybox_image_repo: busybox
+busybox_image_repo: "{{ repo_prefix }}busybox"
 busybox_image_tag: 1.29.2
 helm_version: "v2.11.0"
 helm_image_repo: "lachlanevenson/k8s-helm"
@@ -222,7 +222,7 @@ addon_resizer_version: "1.8.3"
 addon_resizer_image_repo: "k8s.gcr.io/addon-resizer"
 addon_resizer_image_tag: "{{ addon_resizer_version }}"
 
-dashboard_image_repo: "gcr.io/google_containers/kubernetes-dashboard-{{ image_arch }}"
+dashboard_image_repo: "{{ repo_prefix }}gcr.io/google_containers/kubernetes-dashboard-{{ image_arch }}"
 dashboard_image_tag: "v1.10.0"
 
 downloads:
