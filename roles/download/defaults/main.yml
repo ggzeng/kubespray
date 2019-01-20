@@ -197,9 +197,9 @@ test_image_tag: latest
 busybox_image_repo: "{{ repo_prefix }}busybox"
 busybox_image_tag: 1.29.2
 helm_version: "v2.11.0"
-helm_image_repo: "lachlanevenson/k8s-helm"
+helm_image_repo: "{{ repo_prefix }}lachlanevenson/k8s-helm"
 helm_image_tag: "{{ helm_version }}"
-tiller_image_repo: "gcr.io/kubernetes-helm/tiller"
+tiller_image_repo: "{{ repo_prefix }}gcr.io/kubernetes-helm/tiller"
 tiller_image_tag: "{{ helm_version }}"
 
 registry_image_repo: "registry"
