@@ -52,6 +52,7 @@
       name: firewalld
       enabled: no
       state: stopped
+    ignore_errors: yes
 
   - name: insmod br_netfilter
     command: modprobe br_netfilter
